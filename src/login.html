@@ -12,20 +12,34 @@
         <img src="img_avatar2.png" alt="Avatar" class="avatar">
       </div>
 
-      <div class="container">
+      <div class="loginForm">
         <label for="userName"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="userName" required>
+        <input type="text" placeholder="Enter Username" name="userName">
 
         <label for="passwd"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="passwd" required>
+        <input type="password" placeholder="Enter Password" name="passwd">
 
-        <button type="submit">Login</button>
+        <button type="submitLogin">Login</button>
          <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
       </div>
+    </form>
 
-      <div class="container" style="background-color:#f1f1f1">
+    <form method="post" action="register.php">
+      <div class="registrationForm">
+        <label for="newUserName"><b>Username</b></label>
+        <input type="text" placeholder="Enter a unique username" name="newUserName" required>
+
+        <label for="newPasswd"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="newPasswd" required>
+
+        <button type="submitReg">Register</button>
+      </div>
+    </form>
+
+    <form method="post" action="forgottenPass.php">
+      <div class="forgottenPasswd" style="background-color:#f1f1f1">
         <button type="button" class="cancelbtn">Cancel</button>
         <span class="passwd">Forgot <a href="#">password?</a></span>
       </div>

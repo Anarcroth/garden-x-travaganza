@@ -41,4 +41,9 @@ try {
 }   catch(PDOException $e) {
     echo $selectAllQuery . "<br>" . $e->getMessage();
 }
+
+function redirect($url) {
+    header('Location: '.$url);
+    exit();
+}
 ?>

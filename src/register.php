@@ -29,18 +29,26 @@ try {
     $userNames = [];
     foreach ($allUsers as $u) {
         $userNames[] = $u['username'];
+        echo $u['username'];
     }
 
     // Server side check that the new username is unique
-    if (in_array($newUser, $users)) {
-        echo "This username is already taken!";
+    if (in_array($newUser, $userNames)) {
+        $_SESSION['regMesg'] = "This username is already taken!";
     } else {
         $sql = "INSERT INTO users (username,password) VALUES(\"".$newUser."\",\"".$hashed_password."\");";
         $conn->exec($sql);
-        echo "Registered!";
+        $_SESSION['regMesg'] = "Registered!";
     }
 
+    redirect("login.html");
 }   catch(PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
+}
+
+function redirect($url) {
+    ob_clean();
+    header('Location: '.$url);
+    exit();
 }
 ?>

@@ -1,6 +1,7 @@
 <?php
 require "pdo.php";
 require "client.php";
+require "redirect.php";
 
 session_start();
 
@@ -25,11 +26,5 @@ if ($user != null) {
     $_SESSION['regMesg'] = "Registered!";
 }
 
-redirect("login.html");
-
-function redirect($url) {
-    ob_clean();
-    header('Location: '.$url);
-    exit();
-}
+clean_redirect("login.html");
 ?>

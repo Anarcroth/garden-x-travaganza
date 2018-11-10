@@ -1,6 +1,7 @@
 <?php
 require "pdo.php";
 require "client.php";
+require "redirect.php";
 
 session_start();
 
@@ -26,9 +27,4 @@ if(password_verify($userPass, $user['password'])) {
 }
 
 redirect("login.html");
-
-function redirect($url) {
-    header('Location: '.$url);
-    exit();
-}
 ?>

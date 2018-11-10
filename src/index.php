@@ -1,11 +1,11 @@
 <?php
+require "redirect.php";
+
 session_start();
 
 // TODO make redirection it's own file
 if (!$_SESSION['authenticated']) {
-    ob_clean();
-    header('Location: login.html');
-    exit();
+    clean_redirect("login.html");
 }
 ?>
 

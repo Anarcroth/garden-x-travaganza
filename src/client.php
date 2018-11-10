@@ -12,7 +12,7 @@ class client {
             $stm->execute(array($name));
             return $stm->fetchAll()[0];
         } catch (PDOException $pdoe) {
-            echo "Could not fetch user ".$name;
+            echo "<br>Could not fetch user ".$name."<br>".$pdoe->getMessage();
         }
     }
 
@@ -21,7 +21,7 @@ class client {
             $sql = "INSERT INTO users (username,password) VALUES(\"".$name."\",\"".$hashed_password."\");";
             $this->db->exec($sql);
         } catch (PDOException $pdoe) {
-            echo "Could not add new user.";
+            echo "<br>Could not add new user.<br>" . $pdoe->getMessage();
         }
     }
 }

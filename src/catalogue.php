@@ -27,8 +27,15 @@ class catalogue {
         }
     }
 
-    function getItemByCode($code) {
-
+    function getItemByCode($id) {
+        try {
+            $sql = "SELECT * FROM catalogue WHERE id='".$id."'";
+            $stm = $this->db->prepare($sql);
+            $stm->execute();
+            return $stm->fetchAll();
+        } catch (PDOException $pdoe) {
+            echo "<br>Could not fetch item ".$id."<br>".$pdoe->getMessage();
+        }
     }
 }
 ?>

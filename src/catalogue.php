@@ -6,17 +6,25 @@ class catalogue {
     }
 
     function getAll() {
-        $sql = "SELECT * FROM catalogue";
-        $stm = $this->db->prepare($sql);
-        $stm->execute();
-        return $stm->fetchAll();
+        try {
+            $sql = "SELECT * FROM catalogue";
+            $stm = $this->db->prepare($sql);
+            $stm->execute();
+            return $stm->fetchAll();
+        } catch (PDOException $pdoe) {
+            echo "<br>Could not fetch all items<br>".$pdoe->getMessage();
+        }
     }
 
     function getItemByName($name) {
-        $sql = "SELECT * FROM catalogue WHERE item='".$name."'";
-        $stm = $this->db->prepare($sql);
-        $stm->execute();
-        return $stm->fetchAll();
+        try {
+            $sql = "SELECT * FROM catalogue WHERE item='".$name."'";
+            $stm = $this->db->prepare($sql);
+            $stm->execute();
+            return $stm->fetchAll();
+        } catch (PDOException $pdoe) {
+            echo "<br>Could not fetch item ".$name."<br>".$pdoe->getMessage();
+        }
     }
 
     function getItemByCode($code) {

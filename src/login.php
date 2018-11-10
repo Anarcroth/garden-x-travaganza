@@ -20,12 +20,12 @@ $cli = new client($pdo);
 $user = $cli->get($userName);
 
 // Checks that the user password is a valid hash of the saved passwrd in the DB
-$authenticated = false;
 if(password_verify($userPass, $user['password'])) {
-    $authenticated = true;
+    $_SESSION['authenticated'] = true;
+    redirect("index.php");
 }
 
-echo $authenticated;
+redirect("login.html");
 
 function redirect($url) {
     header('Location: '.$url);

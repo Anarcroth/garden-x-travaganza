@@ -1,4 +1,7 @@
 <?php
+require "pdo.php";
+require "client.php";
+
 session_start();
 
 $userName;
@@ -13,34 +16,16 @@ if (isset($_POST['userName']) && isset($_POST['passwd'])) {
     echo "<br> Username or Password were not set!";
 }
 
-try {
-    $servername = "127.0.0.1";
-    $dbname = "garden_x_travaganza";
-    $dsn = "mysql:host=$servername;dbname=$dbname";
-    $user = "martin";
-    $pass = "me4kaikop4e";
+$cli = new client($pdo);
+$user = $cli->get($userName);
 
-    $conn = new PDO($dsn, $user, $pass);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $selectAllQuery = "SELECT * FROM users WHERE username='".$userName."'";
-    $allUsers = $conn->query($selectAllQuery);
-    foreach ($allUsers as $u) {
-        $dbPass = $u['password'];
-    }
-
-    // Checks that the user password is a valid hash of the saved passwrd in the DB
-    $authenticated = false;
-    if(password_verify($userPass, $dbPass)) {
-        $authenticated = true;
-    }
-
-    echo $authenticated;
-
-}   catch(PDOException $e) {
-    echo $selectAllQuery . "<br>" . $e->getMessage();
+// Checks that the user password is a valid hash of the saved passwrd in the DB
+$authenticated = false;
+if(password_verify($userPass, $user['password'])) {
+    $authenticated = true;
 }
+
+echo $authenticated;
 
 function redirect($url) {
     header('Location: '.$url);

@@ -41,6 +41,7 @@ try {
 } catch (PDOException $e) {
     echo "<br>" . $e->getMessage();
 }
+
 foreach ($catalogue as $i) {
     $items[] = $i['item'];
     $ids[] = $i['id'];

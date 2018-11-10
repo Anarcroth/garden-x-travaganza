@@ -1,4 +1,7 @@
 <?php
+require "pdo.php";
+require "catalogue.php";
+
 session_start();
 
 $catalogue = [];
@@ -9,26 +12,11 @@ $descriptions = [];
 $imgPaths = [];
 $codes = [];
 
-try {
-    // TODO set this object into a session or a separate file that would be called when needed
-    $servername = "127.0.0.1";
-    $dbname = "garden_x_travaganza";
-    $dsn = "mysql:host=$servername;dbname=$dbname";
-    $user = "martin";
-    $pass = "me4kaikop4e";
+// TODO send an actual email to someone who has bought something
+$cat = new catalogue($pdo);
+$allItems = $cat->getAll();
 
-    $conn = new PDO($dsn, $user, $pass);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $selectAllItems = "SELECT * FROM catalogue";
-    $catalogue = $conn->query($selectAllItems);
-
-} catch (PDOException $e) {
-    echo "<br>" . $e->getMessage();
-}
-
-foreach ($catalogue as $i) {
+foreach ($allItems as $i) {
     $items[] = $i['item'];
     $ids[] = $i['id'];
     $prices[] = $i['price'];

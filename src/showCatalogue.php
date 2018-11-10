@@ -44,12 +44,12 @@ if (isset($_GET['buy'])) {
 
 <?php
 echo '<table border="1">';
-for ($i = 0; $i < count($items); $i++) {
+foreach ($allItems as $i) {
     echo '<tr>';
-    echo '<td>' . $items[$i] . '</td>';
-    echo '<td>$' . $prices[$i] . '</td>';
-    echo '<td>' . $descriptions[$i] . '</td>';
-    echo '<td><img src="' . $imgPaths[$i] . '" width="100" height="100"></img></td>';
+    echo '<td>' . $i['item'] . '</td>';
+    echo '<td>$' . $i['price'] . '</td>';
+    echo '<td>' . $i['description'] . '</td>';
+    echo '<td><img src="' . $i['imgpath'] . '" width="100" height="100"></img></td>';
 
     // Add a buy link for each item on sale
     echo '<td><a href="' . $_SERVER['PHP_SELF'] .'?buy=' . $i . '">Buy</a></td>';

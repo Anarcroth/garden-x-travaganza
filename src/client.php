@@ -15,5 +15,14 @@ class client {
             echo "Could not fetch user ".$name;
         }
     }
+
+    function add($name, $hashed_password) {
+        try {
+            $sql = "INSERT INTO users (username,password) VALUES(\"".$name."\",\"".$hashed_password."\");";
+            $this->db->exec($sql);
+        } catch (PDOException $pdoe) {
+            echo "Could not add new user.";
+        }
+    }
 }
 ?>

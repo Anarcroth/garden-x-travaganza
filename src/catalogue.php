@@ -25,6 +25,12 @@ class catalogue {
         return $this->exec($sql);
     }
 
+    function getRandomItems() {
+        // For simplicity, 6 is the set limit
+        $sql = "SELECT * FROM catalogue ORDER BY RAND() LIMIT 6";
+        return $this->exec($sql);
+    }
+
     function exec($sql) {
         try {
             $stm = $this->db->prepare($sql);

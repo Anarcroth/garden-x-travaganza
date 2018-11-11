@@ -8,9 +8,7 @@ class catalogue {
     function getAll() {
         try {
             $sql = "SELECT * FROM catalogue";
-            $stm = $this->db->prepare($sql);
-            $stm->execute();
-            return $stm->fetchAll();
+            return $this->exec($sql);
         } catch (PDOException $pdoe) {
             echo "<br>Could not fetch all items<br>".$pdoe->getMessage();
         }
@@ -19,9 +17,7 @@ class catalogue {
     function getItemByName($name) {
         try {
             $sql = "SELECT * FROM catalogue WHERE item='".$name."'";
-            $stm = $this->db->prepare($sql);
-            $stm->execute();
-            return $stm->fetchAll();
+            return $this->exec($sql);
         } catch (PDOException $pdoe) {
             echo "<br>Could not fetch item ".$name."<br>".$pdoe->getMessage();
         }
@@ -30,12 +26,25 @@ class catalogue {
     function getItemByCode($id) {
         try {
             $sql = "SELECT * FROM catalogue WHERE id='".$id."'";
-            $stm = $this->db->prepare($sql);
-            $stm->execute();
-            return $stm->fetchAll();
+            return $this->exec($sql);
         } catch (PDOException $pdoe) {
             echo "<br>Could not fetch item ".$id."<br>".$pdoe->getMessage();
         }
+    }
+
+    function getSetOf($setOfItems) {
+        try {
+            $sql = "SELECT * FROM catalogue WHERE item IN ('".implode("','", $setOfItems)."')";
+            return $this->exec($sql);
+        } catch (PDOException $pdoe) {
+            echo "<br>Could not fetch item ".$id."<br>".$pdoe->getMessage();
+        }
+    }
+
+    function exec($sql) {
+        $stm = $this->db->prepare($sql);
+        $stm->execute();
+        return $stm->fetchAll();
     }
 }
 ?>

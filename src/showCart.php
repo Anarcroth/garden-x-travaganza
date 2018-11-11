@@ -16,30 +16,47 @@ if (isset($_GET['checkout'])) {
 <body>
 
 <table border="1">
-             <thead> <tr> <th>Items in Shopping Cart</th> <th>Price</th> </tr>
+             <thead> <tr> <th>Items in Shopping Cart</th> <th>Amount</th> <th>Price</th> </tr>
 
 <?php
 $cat = new catalogue($pdo);
-$allItems = $cat->getSetOf($_SESSION['cart']);
+$cartSet = $cat->getSetOf($_SESSION['cart']);
+$itemsCount = array_count_values($_SESSION['cart']);
+$allItems = array();
+foreach ($cartSet as $cs) {
+    foreach ($itemsCount as $i => $c) {
+        if ($cs['item'] == $i) {
+            $allItems[] = [$c => $cs];
+        }
+    }
+}
 
-$totalItems = count($_SESSION['cart']);
 $totalCost = 0.00;
 
 // Loop over items in shopping cart
-foreach ($allItems as $i) {
-	echo '<tr>';
-	echo '<td>' . $i['item'] . '</td>';
-	echo '<td>' . $i['price'] . '</td>';
-	echo '</tr>';
+foreach ($allItems as $itemSet) {
+    foreach ($itemSet as $itemCount => $it) {
 
-	$totalCost = $totalCost + $i['price'];
+        echo '<tr>';
+        echo '<td>' . $it['item'] . '</td>';
+        echo '<td>' . $itemCount . '</td>';
+        echo '<td>' . $it['price'] . '</td>';
+        echo '</tr>';
+
+        $totalCost += ($it['price'] * $itemCount);
+    }
 }
 echo '</table>';
 
-echo 'Total items bought= ' . $totalItems . '<br />';
+echo 'Total items bought= ' . count($_SESSION['cart']) . '<br />';
 echo 'Total cost of items bought= ' . $totalCost;
 
 ?>
+<pre>
+<?php
+//print_r($cartSet);
+?>
+</pre>
 
 <p><a href="showCatalogue.php">Continue Shopping</a> or <a href="<?php echo $_SERVER['PHP_SELF']; ?>?checkout='true'">Check Out</a></p>
                                                                                                                                 </body>

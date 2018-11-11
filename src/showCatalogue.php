@@ -4,25 +4,9 @@ require "catalogue.php";
 
 session_start();
 
-$catalogue = [];
-$items = [];
-$ids = [];
-$prices = [];
-$descriptions = [];
-$imgPaths = [];
-$codes = [];
-
 // TODO send an actual email to someone who has bought something
 $cat = new catalogue($pdo);
 $allItems = $cat->getAll();
-
-foreach ($allItems as $i) {
-    $items[] = $i['item'];
-    $ids[] = $i['id'];
-    $prices[] = $i['price'];
-    $descriptions[] = $i['description'];
-    $imgPaths[] = $i['imgpath'];
-}
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
@@ -43,6 +27,10 @@ if (isset($_GET['buy'])) {
 <p> Click on an item to add the item to your shopping cart</p>
 
 <?php
+foreach ($_SESSION['cart'] as $z) {
+    echo $z;
+    echo "<br>";
+}
 echo '<table border="1">';
 foreach ($allItems as $i) {
     echo '<tr>';
@@ -52,7 +40,7 @@ foreach ($allItems as $i) {
     echo '<td><img src="' . $i['imgpath'] . '" width="100" height="100"></img></td>';
 
     // Add a buy link for each item on sale
-    echo '<td><a href="' . $_SERVER['PHP_SELF'] .'?buy=' . $i . '">Buy</a></td>';
+    echo '<td><a href="' . $_SERVER['PHP_SELF'] .'?buy=' . $i['item'] . '">Buy</a></td>';
 
     echo '</tr>';
 }

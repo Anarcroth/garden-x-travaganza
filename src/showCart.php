@@ -46,6 +46,7 @@ foreach ($_SESSION['luckyCart'] as $lc) {
         }
     }
 }
+
 foreach ($_SESSION['luckyCart'] as $lc) {
     foreach ($lc as $item => $price) {
         $allItems[] = [$temp[$item] => ['item' => $item, 'price' => $price]];
@@ -68,15 +69,24 @@ foreach ($allItems as $itemSet) {
     }
 }
 echo '</table>';
-
-echo 'Total cost of items bought= ' . $totalCost;
-
+echo '<br><br>';
 ?>
-<pre>
+
+<table border="1">
+             <thead> <tr> <th>Promo Items</th> <th>Price</th> </tr>
 <?php
-print_r($luckyItemsCount);
+// Show special free items from promo codes
+foreach ($_SESSION['promoCart'] as $promoItem) {
+    foreach ($promoItem as $item => $free) {
+        echo '<tr>';
+        echo '<td>' . $item . '</td>';
+        echo '<td>' . $free . '</td>';
+        echo '</tr>';
+    }
+}
+echo '</table>';
+echo 'Total cost of items bought= ' . $totalCost;
 ?>
-</pre>
 
 <p><a href="showCatalogue.php">Continue Shopping</a> or <a href="<?php echo $_SERVER['PHP_SELF']; ?>?checkout='true'">Check Out</a></p>
                                                                                                                                 </body>

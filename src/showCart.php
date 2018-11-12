@@ -19,6 +19,7 @@ if (isset($_GET['checkout'])) {
              <thead> <tr> <th>Items in Shopping Cart</th> <th>Amount</th> <th>Price</th> </tr>
 
 <?php
+// Get normal cart items
 $cat = new catalogue($pdo);
 $cartSet = $cat->getSetOf($_SESSION['cart']);
 $itemsCount = array_count_values($_SESSION['cart']);
@@ -31,6 +32,26 @@ foreach ($cartSet as $cs) {
     }
 }
 
+// Get lucky cart items
+$temp = array();
+$luckyItemsCount = array();
+$luckyItems = array();
+foreach ($_SESSION['luckyCart'] as $lc) {
+    foreach ($lc as $item => $price) {
+        if (!in_array($item, $temp)) {
+            $temp[] = $item;
+            $temp[$item] = 0;
+        } else {
+            $temp[$item] += 1;
+        }
+    }
+}
+foreach ($_SESSION['luckyCart'] as $lc) {
+    foreach ($lc as $item => $price) {
+        $allItems[] = [$temp[$item] => ['item' => $item, 'price' => $price]];
+    }
+}
+
 $totalCost = 0.00;
 
 // Loop over items in shopping cart
@@ -40,7 +61,7 @@ foreach ($allItems as $itemSet) {
         echo '<tr>';
         echo '<td>' . $it['item'] . '</td>';
         echo '<td>' . $itemCount . '</td>';
-        echo '<td>' . $it['price'] . '</td>';
+        echo '<td>$' . $it['price'] . '</td>';
         echo '</tr>';
 
         $totalCost += ($it['price'] * $itemCount);
@@ -48,13 +69,12 @@ foreach ($allItems as $itemSet) {
 }
 echo '</table>';
 
-echo 'Total items bought= ' . count($_SESSION['cart']) . '<br />';
 echo 'Total cost of items bought= ' . $totalCost;
 
 ?>
 <pre>
 <?php
-//print_r($cartSet);
+print_r($luckyItemsCount);
 ?>
 </pre>
 

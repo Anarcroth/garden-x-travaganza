@@ -10,7 +10,7 @@ $prom = new promo($pdo);
 if (isset($_POST['submitPromoCode'])) {
     $dbCode = $prom->getItemByCode($_POST['promoCode']);
     if ($dbCode != null) {
-        $_SESSION['promoCart'][] = [$dbCode[0]['item'] => "FREE"];
+        $_SESSION['promoCart'][$dbCode[0]['item']] = "FREE";
 
         echo "Success! ";
         echo "You get a " . $dbCode[0]['item'] . " for FREE!!<br>";

@@ -76,13 +76,11 @@ echo '<br><br>';
              <thead> <tr> <th>Promo Items</th> <th>Price</th> </tr>
 <?php
 // Show special free items from promo codes
-foreach ($_SESSION['promoCart'] as $promoItem) {
-    foreach ($promoItem as $item => $free) {
-        echo '<tr>';
-        echo '<td>' . $item . '</td>';
-        echo '<td>' . $free . '</td>';
-        echo '</tr>';
-    }
+foreach ($_SESSION['promoCart'] as $item => $free) {
+    echo '<tr>';
+    echo '<td>' . $item . '</td>';
+    echo '<td>' . $free . '</td>';
+    echo '</tr>';
 }
 echo '</table>';
 echo 'Total cost of items bought= ' . $totalCost;

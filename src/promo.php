@@ -21,7 +21,7 @@ class promo {
             $stm->execute();
             return $stm->fetchAll();
         } catch (PDOException $pdoe) {
-            echo "<br>Could not fetch item ".$id."<br>".$pdoe->getMessage();
+            echo "<br>Could not execute query ".$sql."<br>".$pdoe->getMessage();
         }
     }
 }

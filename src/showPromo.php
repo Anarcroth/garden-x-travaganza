@@ -12,9 +12,7 @@ if (isset($_POST['submitPromoCode'])) {
     if ($dbCode != null) {
         $_SESSION['promoCart'][$dbCode[0]['item']] = "FREE";
 
-        echo "Success! ";
-        echo "You get a " . $dbCode[0]['item'] . " for FREE!!<br>";
-        echo "You can now <a href='showCart.php'>continue shopping</a> more or go to the <a href='showCart.php'>cart</a>";
+        $_SESSION['codeMesg'] = "Success!<br>"."You get a " . $dbCode[0]['item'] . " for FREE!!<br>"."You can now <a href='showCart.php'>continue shopping</a> more or go to the <a href='showCart.php'>cart</a>";
     } else {
         redirect($_SERVER['PHP_SELF']);
     }
@@ -22,12 +20,25 @@ if (isset($_POST['submitPromoCode'])) {
 ?>
 
 <html>
+
+    <title>Index</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="loginstyle.php">
+
 <body>
-<div>
 <form action="" method="post">
-  <label><b>Promo Code</b></label>
-                      <input type="text" placeholder="Enter code" name="promoCode" value="<?php if (isset($_POST['submitPromoCode'])) echo $_POST['promoCode']; ?> "/>
-    <button type="submit" name="submitPromoCode">Go!</button>
-</div>
+    <div class="login">
+    <div class="login-form">
+    <div class="control-group">
+    <input class="input" name="promoCode" placeholder="Please Enter Code" type="text" value="<?php if (isset($_POST['submitPromoCode'])) echo $_POST['promoCode']; ?>"/>
+    <label class="login-field-icon fui-lock" for="login-pass"></label>
+    <div class="app-title">
+    <h1><?php echo $_SESSION['codeMesg']; ?></h1>
+    </div>
+    </div>
+    <button class="btn btn-primary btn-large btn-block" type="submit" name="submitPromoCode">Go!</button>
+    </div>
+    </div>
+</form>
 </body>
 </html>

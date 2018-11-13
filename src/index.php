@@ -10,13 +10,21 @@ if (!$_SESSION['authenticated']) {
 ?>
 
 <html>
+
+  <head>
+    <title>Index</title>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="indexstyle.php">
+  </head>
+
 <body>
-<?php
-echo '<a href="showCatalogue.php">catalogue</a>';
-echo '<br>';
-echo '<a href="showGetLucky.php">get lucky</a>';
-echo '<br>';
-echo '<a href="showPromo.php">promo</a>';
-?>
+
+<div class="container">
+  <a class="btn btn-1" href="showCatalogue.php">catalogue</a>
+  <a class="btn btn-2" href="showGetLucky.php">get lucky</a>
+  <a class="btn btn-3" href="showPromo.php">promo</a>
+</div>
+
 </body>
 </html>

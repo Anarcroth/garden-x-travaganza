@@ -26,7 +26,7 @@ if (isset($_POST['submitPromoCode'])) {
 <div>
 <form action="" method="post">
   <label><b>Promo Code</b></label>
-    <input type="text" placeholder="Enter code" name="promoCode">
+                      <input type="text" placeholder="Enter code" name="promoCode" value=" <?php if (isset($_POST['submitPromoCode'])) echo $_POST['promoCode']; ?> "/>
     <button type="submit" name="submitPromoCode">Go!</button>
 </div>
 </body>

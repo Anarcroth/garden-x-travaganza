@@ -39,7 +39,7 @@ if (isset($_GET['buy'])) {
 
 <body>
 <div class="table-title">
-<h3>Your shopping cart contains <?php echo count($_SESSION['cart']); ?> items.</h3>
+          <h3>Your shopping cart contains <?php echo count($_SESSION['cart']) + count($_SESSION['luckyCart']); ?> items.</h3>
 </div>
 <table class="table-fill">
 <thead>

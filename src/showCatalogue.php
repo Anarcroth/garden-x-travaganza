@@ -20,34 +20,41 @@ if (isset($_GET['buy'])) {
 ?>
 
 <html>
+
+    <title>Index</title>
+    <meta charset="UTF-8" name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    <link rel="stylesheet" type="text/css" href="cartstyle.php">
+
 <body>
 
-<p>Your shopping cart contains <?php echo count($_SESSION['cart']); ?> items.</p>
-
-<p> Click on an item to add the item to your shopping cart</p>
-
+<div class="table-title">
+<h3>Your shopping cart contains <?php echo count($_SESSION['cart']); ?> items.</h3>
+</div>
+<table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Items</th>
+<th class="text-left">Price</th>
+<th class="text-left">Description</th>
+<th class="text-left">Image</th>
+</tr>
+</thead>
+<tbody class="table-hover">
 <?php
-foreach ($_SESSION['cart'] as $z) {
-    echo $z;
-    echo "<br>";
-}
-echo '<table border="1">';
 foreach ($allItems as $i) {
     echo '<tr>';
-    echo '<td>' . $i['item'] . '</td>';
-    echo '<td>$' . $i['price'] . '</td>';
-    echo '<td>' . $i['description'] . '</td>';
-    echo '<td><img src="' . $i['imgpath'] . '" width="100" height="100"></img></td>';
-
-    // Add a buy link for each item on sale
-    echo '<td><a href="' . $_SERVER['PHP_SELF'] .'?buy=' . $i['item'] . '">Buy</a></td>';
+    echo '<td class="text-left">' . $i['item'] . '<br><br><a href="' . $_SERVER['PHP_SELF'] .'?buy=' . $i['item'] . '">Buy</a></td>';
+    echo '<td class="text-left">$' . $i['price'] . '</td>';
+    echo '<td class="text-left">' . $i['description'] . '</td>';
+    echo '<td class="text-left"><img src="' . $i['imgpath'] . '" width="100" height="100"></img></td>';
 
     echo '</tr>';
 }
-echo '</table>';
+?>
+</table>
+</tbody>
 
-echo '<br />';
-
+<?php
 echo "Click here to ";
 ?>
 <a href='showCart.php'>see items in cart</a>

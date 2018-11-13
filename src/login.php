@@ -30,35 +30,33 @@ if(password_verify($userPass, $user['password'])) {
   <head>
     <title>Login</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="loginstyle.php">
   </head>
 
   <body>
-    <form method="post" action="">
-      <div class="imgcontainer">
-        <img src="img_avatar2.png" alt="Avatar" class="avatar">
-      </div>
+    <div class="login">
+        <div class="login-screen">
+            <div class="app-title">
+                <h1>Login</h1>
+            </div>
 
-      <div class="loginForm">
-        <label for="userName"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="userName" value="<?php if (isset($_POST['userName'])) echo $_POST['userName']; ?>"/>
+            <div class="login-form">
+              <form action="" method="post">
+                <div class="control-group">
+                <input type="text" name="userName" class="login-field" value="<?php if (isset($_POST['userName'])) echo $_POST['userName']; ?>" placeholder="username" id="login-name">
+                <label class="login-field-icon fui-user" for="login-name"></label>
+                </div>
 
-        <label for="passwd"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="passwd" required>
+                <div class="control-group">
+                <input type="password" name="passwd" class="login-field" value="" placeholder="password" id="login-pass" required>
+                <label class="login-field-icon fui-lock" for="login-pass"></label>
+                </div>
 
-        <button type="submitLogin">Login</button>
-      </div>
-    </form>
-
-    <form method="post" action="register.php">
-      <div class="registrationForm">
-        <label for="newUserName"><b>Username</b></label>
-        <input type="text" placeholder="Enter a unique username" name="newUserName" value="<?php if (isset($_POST['newUserName'])) echo $_POST['newUserName']; ?>" required>
-
-        <label for="newPasswd"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="newPasswd" required>
-
-        <button type="submitReg">Register</button>
-      </div>
-    </form>
-  </body>
+                <button type="submitLogin" class="btn btn-primary btn-large btn-block">login</button>
+              </form>
+              <a class="login-link" href="register.php">Register</a>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

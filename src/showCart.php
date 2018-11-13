@@ -13,11 +13,24 @@ if (isset($_GET['checkout'])) {
 ?>
 
 <html>
+
+    <title>Index</title>
+    <meta charset="UTF-8" name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    <link rel="stylesheet" type="text/css" href="cartstyle.php">
+
 <body>
-
-<table border="1">
-             <thead> <tr> <th>Items in Shopping Cart</th> <th>Amount</th> <th>Price</th> </tr>
-
+<div class="table-title">
+<h3>Cart</h3>
+</div>
+<table class="table-fill">
+<thead>
+<tr>
+<th class="text-left">Items in Shopping Cart</th>
+<th class="text-left">Amount</th>
+<th class="text-left">Price</th>
+</tr>
+</thead>
+<tbody class="table-hover">
 <?php
 // Get normal cart items
 $cat = new catalogue($pdo);
@@ -60,32 +73,40 @@ foreach ($allItems as $itemSet) {
     foreach ($itemSet as $itemCount => $it) {
 
         echo '<tr>';
-        echo '<td>' . $it['item'] . '</td>';
-        echo '<td>' . $itemCount . '</td>';
-        echo '<td>$' . $it['price'] . '</td>';
+        echo '<td class="text-left">' . $it['item'] . '</td>';
+        echo '<td class="text-left">' . $itemCount . '</td>';
+        echo '<td class="text-left">$' . $it['price'] . '</td>';
         echo '</tr>';
 
         $totalCost += ($it['price'] * $itemCount);
     }
 }
-echo '</table>';
-echo '<br><br>';
 ?>
-
-<table border="1">
-             <thead> <tr> <th>Promo Items</th> <th>Price</th> </tr>
+<thead>
+<tr>
+<th class="text-left">Promo Items</th>
+<th class="text-left">Amount</th>
+<th class="text-left">Price</th>
+</tr>
+</thead>
+<tbody class="table-hover">
 <?php
 // Show special free items from promo codes
 foreach ($_SESSION['promoCart'] as $item => $free) {
     echo '<tr>';
-    echo '<td>' . $item . '</td>';
-    echo '<td>' . $free . '</td>';
+    echo '<td class="text-left">' . $item . '</td>';
+    echo '<td class="text-left">' . 1 . '</td>';
+    echo '<td class="text-left">' . $free . '</td>';
     echo '</tr>';
 }
-echo '</table>';
-echo 'Total cost of items bought= ' . $totalCost;
 ?>
+</table>
+</tbody>
+
+<div class="table-title">
+<h3> <?php echo 'Total cost of items bought= ' . $totalCost; ?> </h3>
+</div>
 
 <p><a href="showCatalogue.php">Continue Shopping</a> or <a href="<?php echo $_SERVER['PHP_SELF']; ?>?checkout='true'">Check Out</a></p>
-                                                                                                                                </body>
-                                                                                                                                      </html>
+</body>
+</html>

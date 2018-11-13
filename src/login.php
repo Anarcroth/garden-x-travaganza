@@ -13,8 +13,6 @@ if (isset($_POST['userName']) && isset($_POST['passwd'])) {
 
     $userPass = $_POST['passwd'];
     $_SESSION['passwd'] = $userPass;
-} else {
-    echo "<br> Username or Password were not set!";
 }
 
 $cli = new client($pdo);
@@ -26,5 +24,43 @@ if(password_verify($userPass, $user['password'])) {
     redirect("index.php");
 }
 
-redirect("login.html");
+//redirect("login.php");
 ?>
+
+<html>
+
+  <head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+  </head>
+
+  <body>
+    <form method="post" action="">
+      <div class="imgcontainer">
+        <img src="img_avatar2.png" alt="Avatar" class="avatar">
+      </div>
+
+      <div class="loginForm">
+        <label for="userName"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="userName">
+
+        <label for="passwd"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="passwd">
+
+        <button type="submitLogin">Login</button>
+      </div>
+    </form>
+
+    <form method="post" action="register.php">
+      <div class="registrationForm">
+        <label for="newUserName"><b>Username</b></label>
+        <input type="text" placeholder="Enter a unique username" name="newUserName" required>
+
+        <label for="newPasswd"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="newPasswd" required>
+
+        <button type="submitReg">Register</button>
+      </div>
+    </form>
+  </body>
+</html>

@@ -53,17 +53,25 @@ foreach ($_SESSION['luckyCart'] as $lc) {
     foreach ($lc as $item => $price) {
         if (!in_array($item, $temp)) {
             $temp[] = $item;
-            $temp[$item] = 0;
+            $temp[$item] = 1;
         } else {
             $temp[$item] += 1;
         }
     }
 }
 
+// Make the lucky items unique array so that there are no duplicates in the table
+$temp2 = array();
 foreach ($_SESSION['luckyCart'] as $lc) {
     foreach ($lc as $item => $price) {
-        $allItems[] = [$temp[$item] => ['item' => $item, 'price' => $price]];
+        if (!in_array($item, $temp2)) {
+            $temp2[$item] = $price;
+        }
     }
+}
+
+foreach ($temp2 as $item => $price) {
+    $allItems[] = [$temp[$item] => ['item' => $item, 'price' => $price]];
 }
 
 $totalCost = 0.00;

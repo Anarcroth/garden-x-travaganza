@@ -23,8 +23,6 @@ if(password_verify($userPass, $user['password'])) {
     $_SESSION['authenticated'] = true;
     redirect("index.php");
 }
-
-//redirect("login.php");
 ?>
 
 <html>
@@ -42,10 +40,10 @@ if(password_verify($userPass, $user['password'])) {
 
       <div class="loginForm">
         <label for="userName"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="userName">
+        <input type="text" placeholder="Enter Username" name="userName" value="<?php if (isset($_POST['userName'])) echo $_POST['userName']; ?>"/>
 
         <label for="passwd"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="passwd">
+        <input type="password" placeholder="Enter Password" name="passwd" required>
 
         <button type="submitLogin">Login</button>
       </div>
@@ -54,7 +52,7 @@ if(password_verify($userPass, $user['password'])) {
     <form method="post" action="register.php">
       <div class="registrationForm">
         <label for="newUserName"><b>Username</b></label>
-        <input type="text" placeholder="Enter a unique username" name="newUserName" required>
+        <input type="text" placeholder="Enter a unique username" name="newUserName" value="<?php if (isset($_POST['newUserName'])) echo $_POST['newUserName']; ?>" required>
 
         <label for="newPasswd"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="newPasswd" required>
